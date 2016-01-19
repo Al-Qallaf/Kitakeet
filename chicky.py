@@ -6,6 +6,8 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(20, GPIO.OUT)
+GPIO.setup(26, GPIO.OUT)
+
 
 sensor_type = Adafruit_DHT.AM2302
 pin = 23
@@ -27,3 +29,10 @@ while ( True ):
       else:
           print ('Failed to get reading.')
       time.sleep(3)
+
+      if (humidity > 65):
+            GPIO.output(26, GPIO.HIGH)
+            print ('Fan, Start')
+      else:
+            GPIO.output(26, GPIO.LOW)
+            print ('Fan, Stopped')
